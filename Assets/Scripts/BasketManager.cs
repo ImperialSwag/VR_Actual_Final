@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BasketManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BasketManager : MonoBehaviour
 
     public GameObject balls;
     List<Transform> ballLocations;
+
+    public TextMeshProUGUI start, scoretxt;
 
     public float timer = 60;
     private float timeRemaining;
@@ -31,11 +34,13 @@ public class BasketManager : MonoBehaviour
             if(timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
+                DisplayTime(timeRemaining);
             }
             else
             {
                 timeRemaining = 0;
                 started = false;
+                start.text = "Start Game";
             }
         }
     }
@@ -45,6 +50,7 @@ public class BasketManager : MonoBehaviour
         if (started)
         {
             score += amount;
+            scoretxt.text = "Score\n" + score;
         }
     }
 
@@ -53,7 +59,10 @@ public class BasketManager : MonoBehaviour
         if (!started)
         {
             score = 0;
+            scoretxt.text = "Score\n" + score;
+            
             timeRemaining = timer;
+            DisplayTime(timeRemaining);
             started = true;
         }
     }
@@ -64,5 +73,14 @@ public class BasketManager : MonoBehaviour
         {
             balls.transform.GetChild(i).position = ballLocations[i].position;
         }
+    }
+    void DisplayTime(float timeToDisplay)
+    {
+        timeToDisplay += 1;
+
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        start.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
