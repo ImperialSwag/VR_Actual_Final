@@ -11,7 +11,7 @@ public class BasketManager : MonoBehaviour
     public bool started = false;
 
     public GameObject balls;
-    List<Transform> ballLocations;
+    List<Vector3> ballLocations = new List<Vector3>();
 
     public TextMeshProUGUI start, scoretxt;
 
@@ -21,9 +21,9 @@ public class BasketManager : MonoBehaviour
     private void Start()
     {
         timeRemaining = timer;
-        foreach(Transform child in balls.transform)
+        for (int i = 0; i < balls.transform.childCount; i++)
         {
-            ballLocations.Add(child);
+            ballLocations.Add(balls.transform.GetChild(i).position);
         }
     }
 
@@ -71,7 +71,7 @@ public class BasketManager : MonoBehaviour
     {
         for(int i = 0; i < balls.transform.childCount; i++)
         {
-            balls.transform.GetChild(i).position = ballLocations[i].position;
+            balls.transform.GetChild(i).position = ballLocations[i];
         }
     }
     void DisplayTime(float timeToDisplay)

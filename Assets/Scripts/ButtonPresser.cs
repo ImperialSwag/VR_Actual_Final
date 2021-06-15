@@ -15,7 +15,7 @@ public class ButtonPresser : MonoBehaviour
     {
         if (inTrigger)
         {
-            if(enteredObj != null && OVRInput.Get(OVRInput.Button.One, OVRInput.Controller.Touch))
+            if(enteredObj != null && (OVRInput.Get(OVRInput.Button.One, OVRInput.Controller.Touch)||Input.GetKeyDown(KeyCode.Space)))
             {
                 OtherFunctions.Invoke();
             }

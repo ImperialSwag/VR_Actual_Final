@@ -11,7 +11,7 @@ public class BasketChecker : MonoBehaviour
     {
         if (other.CompareTag("Basketball"))
         {
-            basketManager.IncreaseScore(1);
+            basketManager.IncreaseScore(score);
         }
     }
 }
